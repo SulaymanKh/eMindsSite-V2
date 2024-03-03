@@ -1,6 +1,6 @@
 # eMinds Website 
 
-## Visit me! www.eMindsEducation.co.uk
+## Visit me! emindseducation.co.uk
 
 This is a website for a small education company built with Next.js and Tailwind CSS. It showcases your skills, projects, and achievements in an elegant and responsive design.
 
