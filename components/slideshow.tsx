@@ -1,0 +1,76 @@
+import React, { useState } from 'react';
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import { RxDotFilled } from 'react-icons/rx';
+//import Post1 from "@/public/Post-1.png";
+//https://ibb.co/d4Q7pjb
+
+function Slideshow() {
+  const slides = [
+    {
+      url: 'https://i.ibb.co/2qyNF8J/Post-1.png',
+    },
+    {
+      url: 'https://i.ibb.co/GHZk2J4/1.png',
+    },
+    {
+      url: 'https://i.ibb.co/nzPvK60/2.png',
+    },
+
+    {
+      url: 'https://i.ibb.co/0tHdvQb/3.png',
+    },
+    {
+      url: 'https://i.ibb.co/dGcN1jJ/4.png',
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === slides.length - 1;
+    const newIndex = isLastSlide ? 0 : currentIndex + 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const goToSlide = (slideIndex: React.SetStateAction<number>) => {
+    setCurrentIndex(slideIndex);
+  };
+
+  return (
+    <div className='w-full m-auto py-16 px-4 relative group'>
+      <div
+        style={{ 
+          backgroundImage: `url(${slides[currentIndex].url})`,
+          backgroundRepeat: 'no-repeat' }}
+        className='w-full h-[50vh] rounded-2xl bg-center bg-contain duration-500'
+      ></div>
+      {/* Left Arrow */}
+      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <BsChevronCompactLeft onClick={prevSlide} size={30} />
+      </div>
+      {/* Right Arrow */}
+      <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <BsChevronCompactRight onClick={nextSlide} size={30} />
+      </div>
+      <div className='flex top-4 justify-center py-2'>
+        {slides.map((slide, slideIndex) => (
+          <div
+            key={slideIndex}
+            onClick={() => goToSlide(slideIndex)}
+            className='text-2xl cursor-pointer'
+          >
+            <RxDotFilled />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Slideshow;
